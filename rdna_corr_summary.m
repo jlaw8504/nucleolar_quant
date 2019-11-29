@@ -4,13 +4,13 @@
 %NOTE : This summary script relies on relative locations of the directories
 %so please do NOT move this script from current location
 
-%% Define relative directories
+%% Define relative directory locations
 s.cdc14.dir = fullfile(...
-    '..', 'Images', 'KBY6310p1_MH3342_SPC29RFP_CDC14CFP', 'all_max_proj');
+    'overlay', 'KBY6310p1_MH3342_SPC29RFP_CDC14CFP', 'all_max_proj');
 s.cbf5.dir = fullfile(...
-    '..', 'Images', 'KBY6315p1_MH3342_SPC29RFP_CBF5RFP', 'all_max_proj');
+    'overlay', 'KBY6315p1_MH3342_SPC29RFP_CBF5RFP', 'all_max_proj');
 s.smc4.dir = fullfile(...
-    '..', 'Images', 'KBY6392p1_CDC14GFP_SMC4mCherry', 'all_max_proj');
+    'overlay', 'KBY6392p1_CDC14GFP_SMC4mCherry', 'all_max_proj');
 %% Define rdna_pattern and nuc_pattern variables
 s.cdc14.rdna_pattern = '*GFP.tif';
 s.cbf5.rdna_pattern = '*GFP.tif';

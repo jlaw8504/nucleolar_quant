@@ -1,4 +1,4 @@
-function [otsu_area_array, int_int_array, log_array] = quant_int(directory)
+function [otsu_area_array, int_int_array, homog_array] = quant_int(directory)
 %%quant_int Use multithresh to separate signal from noise for CDC14 and
 %%CBF5 fluorescent signals and perform quantitative intensity analysis on
 %%the signal-labeled pixels.
@@ -23,7 +23,7 @@ gfp_files = dir(fullfile(directory, '*.tif'));
 %% Pre-allocate array variables
 otsu_area_array = zeros([1,size(gfp_files,1)]);
 int_int_array = zeros([1,size(gfp_files,1)]);
-log_array = zeros([1,size(gfp_files,1)]);
+homog_array = zeros([1,size(gfp_files,1)]);
 for n = 1:size(gfp_files,1)
     filename = fullfile(gfp_files(n).folder,gfp_files(n).name);
     %open image with readTiffStack
@@ -49,7 +49,7 @@ for n = 1:size(gfp_files,1)
             filename);
         otsu_area_array(n) = nan;
         int_int_array(n) = nan;
-        log_array(n) = nan;
+        homog_array(n) = nan;
         continue;
     end
     %% OTSU thresholding
@@ -60,16 +60,11 @@ for n = 1:size(gfp_files,1)
     mip_filtered = mip .* otsu_bin;
     mip_filtered(mip_filtered == 0) = nan;
     int_int_array(n) = sum(mip_filtered(:), 'omitnan');
-    %% LoG imFilter for detecting local changes in intensity
-    h = fspecial('log');
-    corr_im = imfilter(mip, h);
-    log_array(n) = sum(corr_im(:).*otsu_bin(:));
-%     % Show the binary mask
-%         f = figure('WindowState', 'maximized');
-%         subplot(1,2,1);
-%         imshow(mip, []);
-%         subplot(1,2,2);
-%         imshow(otsu_bin, []);
-%         waitforbuttonpress;
-%         close(f);
+    %% Calculate signal homogeneity using graycoprops
+    filter_im = mip;
+    filter_im(~otsu_bin) = nan;
+    filter_im = filter_im - min(filter_im(:));
+    filter_im = filter_im./max(filter_im);
+    gc_props = graycoprops(graycomatrix(filter_im), 'Homogeneity');
+    homog_array(n) = gc_props.Homogeneity;
 end
