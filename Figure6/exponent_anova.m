@@ -1,4 +1,4 @@
-S = load('nucleolus_frap_data.mat');
+load('nucleolus_frap_data.mat');
 %only compare the exponents of Cbf5, Net1, and Rpa190
 %MH3342 doesn't show recovery
 %% filter out all signals with less than 20% recovery
