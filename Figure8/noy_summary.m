@@ -2,8 +2,10 @@
 load Cdc14GFP_Cbf5mCh_dirs.mat;
 treatments = {'gal', 'glu', 'wt'};
 phases = {'g1', 'm'};
+return_dir = pwd;
 for t = 1:numel(treatments)
     for p = 1:numel(phases)
+        cd(return_dir);
         cd(S.(treatments{t}).(phases{p}).dir);
         cdc14_files = dir('*GFP.tif');
         for f = 1:numel(cdc14_files)

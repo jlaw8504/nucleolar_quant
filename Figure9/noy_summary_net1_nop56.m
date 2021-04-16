@@ -2,8 +2,10 @@
 load Nop56GFP_Net1mCh_dirs.mat;
 treatments = {'gal', 'glu'};
 phases = {'g1', 'm'};
+return_dir = pwd;
 for t = 1:numel(treatments)
     for p = 1:numel(phases)
+        cd(return_dir);
         cd(S.(treatments{t}).(phases{p}).dir);
         net1_files = dir('*RFP.tif');
         for f = 1:numel(net1_files)
@@ -94,11 +96,11 @@ for m = 1:numel(metrics)
         case 2
             ylabel('Nop56-GFP Volume (\mum^3');
         case 3
-            ylabel('Nop56-GFP Signal STD');
+            ylabel('Rescaled Nop56-GFP Signal STD');
         case 4
             ylabel('Net1-mCherry Volume (\mum^3)');
         case 5
-            ylabel('Net1-mCherry Signal STD (\mum^3)');
+            ylabel('Rescaled Net1-mCherry Signal STD (\mum^3)');
     end
     xticklabels(...
         {'G1, pNOY TX On', 'G1, pNOY TX Off', ...

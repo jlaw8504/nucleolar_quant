@@ -1,5 +1,5 @@
 %% Load in the data
-S = load('nucleolar_data.mat');
+S = load('nucleolus_frap_data.mat');
 S = S.S;
 %% Iterate over each fieldname
 fnames = fieldnames(S);

@@ -1,6 +1,6 @@
 %% Load in the data
-S = load('nucleolus_frap_data.mat');
-S = orderfields(S,  {'rDNA-lacO/LacI-GFP', 'cdc14', 'net1', 'rpa190', 'cbf5'});
+load('nucleolus_frap_data.mat');
+S = orderfields(S,  {'rdna', 'cdc14', 'net1', 'rpa190', 'cbf5'});
 %% Iterate over each fieldname
 fnames = fieldnames(S);
 data_cell = cell([numel(fnames), 1]);

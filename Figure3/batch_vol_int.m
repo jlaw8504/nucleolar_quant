@@ -8,6 +8,7 @@ cnt = 1;
 return_dir = pwd;
 for f = 1:numel(fnames)
     for p = 1:numel(phases)
+        display(cnt);
         cd(return_dir)
         cd(S.(fnames{f}).(phases{p}).dir);
         [ ...
@@ -38,7 +39,43 @@ for f = 1:numel(fnames)
         vol_rhos(cnt) = S.(fnames{f}).(phases{p}).vol_rho;
         vol_ps(cnt) = S.(fnames{f}).(phases{p}).vol_p;
         clear outlier_mat;
-        cnt = cnt + 1
+        cnt = cnt + 1;
     end
 end
 cd(return_dir);
+% create Cdc14-GFP G1 and Cbf5-GFP, G1 mean intensity vs volume scatter
+% plots
+voxel_vol_um3 = (0.0645 * 0.0645 * 0.2);
+figure;
+scatter(S.cdc14.g1.vols * voxel_vol_um3, S.cdc14.g1.mean_ints);
+xlabel('Volume(\mu^3)');
+ylabel('Mean Intensity Above Background (AU)');
+title('Cdc14-GFP G1')
+figure;
+scatter(S.cbf5.g1.vols * voxel_vol_um3, S.cbf5.g1.mean_ints);
+xlabel('Volume(\mu^3)');
+ylabel('Mean Intensity Above Background (AU)');
+title('Cbf5-GFP G1')
+% create bar charts
+labels = {...
+    'Cdc14-GFP', ...
+    'Net1-GFP', ...
+    'Gar1-GFP', ...
+    'Nop56-GFP', ...
+    'Nop1-GFP', ...
+    'Cbf5-GFP'...
+    };
+% G1 barchart
+figure;
+bar(vol_rhos(1:2:end));
+title('G1');
+xticklabels(labels);
+xtickangle(45)
+ylabel('Pearson Correlation');
+% G2/M barchart
+figure;
+bar(vol_rhos(2:2:end));
+title('G2/M');
+xticklabels(labels);
+xtickangle(45);
+ylabel('Pearson Correlation');

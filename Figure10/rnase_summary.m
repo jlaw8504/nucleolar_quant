@@ -101,6 +101,10 @@ for m = 1:numel(metrics)
             ylabel('Cdc14-GFP Volume (\mum^3)');
         case 5
             ylabel('Rescaled Cdc14-GFP Signal STD');
+        case 6
+            ylabel('Relative Positional Variance');
+        case 7
+            ylabel('Cbf5-mCherry Sphericity');
     end
     xticklabels(...
         {'G1, Vector', 'G1,RnaseH', ...

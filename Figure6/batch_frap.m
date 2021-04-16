@@ -46,7 +46,7 @@ for f = 1:numel(fnames)
 end
 [p, tbl, stats] = anova1(vertcat(data_cell{:}), vertcat(label_cell{:}));
 figure;
-[c, m] = multcompare(stats)
+[c, m] = multcompare(stats);
 %% Bar chart with errorbars
 figure;
 bar(m(:,1));
