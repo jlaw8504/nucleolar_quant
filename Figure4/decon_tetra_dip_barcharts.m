@@ -1,5 +1,5 @@
 %% Calculate compression ratio (mean int/ vol)
-load('dip_tet_data.mat');
+load('decon_dip_tet_data.mat');
 fnames = fieldnames(S);
 treatments = {'dimer', 'tetra'};
 phases = {'g1', 'm'};
@@ -35,7 +35,7 @@ errorbar( ...
 hold off;
 set(gca, 'XTickLabels', labels);
 set(gca, 'XTickLabelRotation', 30);
-title('G1');
+title('Deconvolved, G1');
 ylabel('Mean Intensity/\mum^3');
 %% Metaphase
 figure
@@ -50,5 +50,5 @@ errorbar( ...
 hold off;
 set(gca, 'XTickLabels', labels);
 set(gca, 'XTickLabelRotation', 30);
-title('Metaphase');
+title('Deconvolved, Metaphase');
 ylabel('Mean Intensity/\mum^3');

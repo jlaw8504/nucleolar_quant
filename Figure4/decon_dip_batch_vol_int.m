@@ -1,4 +1,4 @@
-load('dip_tet_dir.mat');
+load('decon_dip_tet_dir.mat');
 fnames = fieldnames(S);
 treatments = {'dimer', 'tetra'};
 phases = {'g1', 'm'};

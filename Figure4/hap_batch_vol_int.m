@@ -8,6 +8,8 @@ return_dir = pwd;
 for f = 1:numel(fnames)
     for t = 1:numel(treatments)
         for p = 1:numel(phases)
+            cnt
+            cd(return_dir);
             cd(S.(fnames{f}).(treatments{t}).(phases{p}).dir);
             [ ...
                 outlier_mat(:,1), ...
@@ -37,7 +39,7 @@ for f = 1:numel(fnames)
             vol_rhos(cnt) = S.(fnames{f}).(treatments{t}).(phases{p}).vol_rho;
             vol_ps(cnt) = S.(fnames{f}).(treatments{t}).(phases{p}).vol_p;
             clear outlier_mat;
-            cnt = cnt + 1
+            cnt = cnt + 1;
         end
     end
 end
